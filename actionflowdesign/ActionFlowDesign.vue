@@ -3,11 +3,11 @@
     <div v-if="easyFlowVisible">
         <el-row>
             <!--顶部工具菜单-->
-            <el-col :span="24">
+            <!-- <el-col :span="24">
                 <div class="flow-tooltar">
                     {{data.name}}
                     <el-button icon="el-icon-document" @click="dataInfo(false)" size="mini">流程设计图</el-button>
-                    <el-button icon="el-icon-document" @click="dataInfo(true)" size="mini">流程视图</el-button>
+                    <el-button icon="el-icon-document" @click="dataInfo(true)" size="mini">流程数据</el-button>
                     <el-button @click="dataReloadA" icon="el-icon-refresh" size="mini">切换流程A</el-button>
                     <el-button @click="dataReloadB" icon="el-icon-refresh" size="mini">切换流程B</el-button>
                     <el-button @click="dataReloadC" icon="el-icon-refresh" size="mini">切换流程C</el-button>
@@ -18,7 +18,7 @@
                     </div>
                     <el-button @click="setLine" icon="el-icon-edit-outline" size="mini">设置连线</el-button>
                 </div>
-            </el-col>
+            </el-col> -->
         </el-row>
         <div class="flow-main">
             <!--左侧可以拖动的菜单-->
@@ -282,7 +282,8 @@ export default {
       // }
       var node = {
         id: nodeId,
-        name: `${nodeMenu.name}(${nodeId})`,
+        // name: `${nodeMenu.name}(${nodeId})`,
+        name: nodeMenu.name,
         type: nodeMenu.type,
         left: left + 'px',
         top: top + 'px',
@@ -354,9 +355,8 @@ export default {
       console.log('点击')
     },
     dblclickNode (node) {
-      let nodetype = node.type
       console.log('点击')
-      this.executeEvent(nodetype, this, node, function () {})
+      this.executeEvent('clicknode', this, node, function () {})
       // this.$refs.nodeForm.init(this.data, nodeId)
     },
     // 是否具有该线

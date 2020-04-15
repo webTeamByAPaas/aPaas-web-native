@@ -20,7 +20,7 @@ export const easyFlowMixin = {
         // 是否打开jsPlumb的内部日志记录
         LogEnabled: true,
         // 绘制线
-        PaintStyle: { stroke: '#E0E3E7', strokeWidth: 1 },
+        PaintStyle: { stroke: '#3d8af1', strokeWidth: 3 },
         // 绘制箭头
         Overlays: [
           ['Arrow', { width: 10, length: 8, location: 1, foldback: 0.8 }],

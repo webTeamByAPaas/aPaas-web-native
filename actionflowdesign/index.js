@@ -7,8 +7,9 @@ export default {
   name: 'actionflowdesign',
   mixins: [XtWeb.Engine.UI.View],
   data: function () {
-    // let viewRule = this.viewRule
+    let viewRule = this.viewRule
     return {
+      eventlist: viewRule.eventlist,
       flowData: {
         name: '活动流程',
         nodeList: [],
@@ -38,7 +39,7 @@ export default {
   methods: {
     // 通过trigger type分发事件
     executeEvent (triggerType, eventTarget, data, callback) {
-      if (this.nodeTypeMap[triggerType]) {
+      if (this.nodeTypeMap[data.type]) {
         // 判断是节点点击事件，记录当前点击节点
         this.currentClickNode = data
       }
@@ -55,9 +56,14 @@ export default {
         }
       }
     },
-    getView (type) {
+    getView (type, getter) {
+      // type对应component单个取值，如果是整个取值则需要对应从getter中解析关系
       let targetData
-      switch (type) {
+      let targetType = ''
+      if (getter && getter.ctrl && getter.ctrl.component) {
+        targetType = getter.ctrl.component
+      }
+      switch (targetType) {
         case 'getFlowInfo':
           // 取整个设计器控件的数据
           targetData = {
@@ -66,15 +72,30 @@ export default {
           }
           break
         case 'getCurrentClickNode':
-          targetData = this.currentClickNode
+          try {
+            targetData = {
+              nodedate: this.currentClickNode,
+              viewdata: this.flowViewData.nodeView[this.currentClickNode.id] || null
+            }
+          } catch (e) {
+            console.error('[数据异常]：currentClickNode不存在')
+          }
           break
         default:
+          targetData = {
+            flowData: this.flowData,
+            flowViewData: this.flowViewData
+          }
           break
       }
       return targetData
     },
-    setView (data, type) {
-      switch (type) {
+    setView (data, type, setter) {
+      let targetType = ''
+      if (setter && setter.ctrl && setter.ctrl.component) {
+        targetType = setter.ctrl.component
+      }
+      switch (targetType) {
         case 'setFlowInfo':
           // 新建 or 编辑 给设计器赋值，结构如下
           // data = {
@@ -88,8 +109,13 @@ export default {
           //     nodeView: []
           //   }
           // }
-          this.flowData = data.flowData
-          this.flowViewData = data.flowViewData
+          if (data) {
+            // 编辑
+            this.flowData = data.flowData
+            this.flowViewData = data.flowViewData
+          } else {
+            // 新增
+          }
           break
         case 'setCurrentViewData':
           // 节点编辑视图数据
@@ -98,9 +124,22 @@ export default {
           //   viewdata: {}
           // }
           let id = data.nodedata.id
+          // 更新流程节点name
+          this.flowData.nodeList.forEach(node => {
+            node.name = data.nodedata.name
+          })
+          // 更新节点视图数据
           this.flowViewData.nodeView[id] = data.viewdata
           break
         default:
+          if (data) {
+            try {
+              this.flowData = data.flowData
+              this.flowViewData = data.flowViewData
+            } catch (e) {
+              console.error('[数据异常]：data结构不是 { flowData:{...}, flowViewData: {...}}')
+            }
+          }
           break
       }
     }
