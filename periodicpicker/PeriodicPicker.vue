@@ -1,5 +1,5 @@
 <template>
-  <div :style="viewStyle" class="xt-periodicpicker test">
+  <div :style="viewStyle" class="xt-periodicpicker">
     <el-form-item
       v-if="displayStyle !== 'text'"
       :label="title || ''"

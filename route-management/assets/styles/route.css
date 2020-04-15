@@ -1,0 +1,147 @@
+.visit-route-manager-container {
+  display: flex;
+  height: 100%;
+  padding: 10px;
+}
+
+.visit-route-manager-container>div {
+  flex: 1;
+  height: 100%;
+}
+
+.visit-route-manager-container .tree-view-container {
+  min-width: 275px;
+  max-width: 275px;
+  height: 100%;
+}
+
+.visit-route-manager-container .tree-view-container .tree-container {
+  height: calc(100% - 41px);
+  overflow: auto;
+}
+
+.visit-route-manager-container .tree-view-container .filter .filter-item-container {
+  margin-bottom: 5px;
+}
+
+.filter .filter-item-container .el-form .el-form-item{
+  margin: 0;
+}
+
+.visit-route-manager-container .route-container, .visit-route-manager-container .route-container .list-container {
+  height: 100%;
+}
+
+.visit-route-manager-container .route-container .list-container {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.map__pagination {
+    align-self: flex-end;
+    margin-top: 6px;
+}
+.visit-route-manager-container .route-container .list-container .map-container {
+  position: relative;
+  height: 100%;
+  margin-left: 10px;
+  border: 1px solid #E5E5E5;
+}
+
+.visit-route-manager-container .visit-route-container {
+  position: relative;
+  width: 900px;
+}
+
+.visit-route-manager-container .visit-route-container .el-tabs{
+  height: 100%;
+}
+
+.visit-route-manager-container .visit-route-container .el-tabs .el-tabs__content .el-tab-pane{
+  height: 100%;
+}
+
+.visit-route-manager-container .visit-route-container .el-tabs .el-tabs__content{
+  height: calc(100% - 42px);
+}
+
+.visit-route-manager-container .import-export-container {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  z-index: 1;
+}
+
+.visit-route-manager-container .list-container .table-container {
+  /*height: calc(100% - 98px);*/
+  overflow: auto;
+  margin-left: 10px;
+}
+
+.visit-route-manager-container .route-list {
+  position: relative;
+  border-left: 1px solid #E5E5E5;
+}
+
+.visit-route-manager-container .route-list .tools {
+  padding: 5px 10px;
+}
+
+.visit-route-manager-container .route-list .filter {
+  padding: 5px 10px;
+}
+
+.visit-route-manager-container .route-list .list {
+  height: calc(100% - 117px);
+  overflow: auto;
+}
+
+.visit-route-manager-container .route-list .list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.visit-route-manager-container .route-container {
+  display: flex;
+}
+
+.visit-route-manager-container .route-container>div {
+  flex: 1;
+}
+
+.visit-route-manager-container .route-container .customer-container {
+  width: 600px;
+  height: 100%;
+  border-left: 1px solid #E5E5E5;
+}
+
+.visit-route-manager-container .route-container .customer-container > .el-tabs{
+  height: 42px;
+  overflow: hidden;
+}
+
+.visit-route-manager-container .route-container .route-list {
+  max-width: 230px;
+  min-width: 230px;
+}
+
+.visit-route-manager-container .route-list .list ul li {
+  padding: 8px 15px;
+  list-style: none;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #E5E5E5;
+  cursor: pointer;
+}
+
+.visit-route-manager-container .route-list .list ul li .customer-count {
+  color: #8C8C8C;
+}
+
+.visit-route-manager-container .route-list .list ul li.active {
+  background: #608FE9;
+}
+
+.visit-route-manager-container .route-list .list ul li.active>div {
+  color: #fff;
+}
