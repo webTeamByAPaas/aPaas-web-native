@@ -1,0 +1,79 @@
+.amapplus-window-content{
+    padding: 10px;
+    & > h3{
+        font-size: 16px;
+        font-weight: 400;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 2px 2px;
+        margin: 0;
+    }
+    & > p{
+        font-size: 14px;
+        padding: 4px 2px 0;
+        color: #666;
+        min-width: 120px;
+        margin: 0;
+    }
+}
+
+.icon {
+    display: inline-block;
+    overflow: hidden;
+    background-size: cover;
+
+    &.icon-real-map {
+        background-image: url("./real.png");
+        width: 39px;
+        height: 53px;
+        position: relative;
+        & > article{
+            padding-top: 11px;
+            transform: translateX(-1px);
+            text-align: center;
+            color: #4B81E9;
+            font-size: 14px;
+            line-height: 11px;
+            font-style: normal;
+        }
+    }
+
+    &.icon-monitor-map {
+        background-image: url("./monitor.png");
+        width: 22px;
+        height: 22px;
+    }
+
+    &.icon-plan-map {
+        background-image: url("./plan.png");
+        width: 39px;
+        height: 53px;
+        position: relative;
+        & > article{
+            padding-top: 8px;
+            transform: translateX(-1px);
+            text-align: center;
+            color: #e99052;
+            font-size: 14px;
+            font-style: normal;
+        }
+    }
+
+    &.icon-check-map {
+        background-image: url("./check.png");
+        width: 39px;
+        height: 53px;
+    }
+
+    &.icon-customer-map {
+        background-image: url("./customer.png");
+        width: 39px;
+        height: 53px;
+    }
+
+    &.icon-stop-map {
+        background-image: url("./stop.png");
+        width: 39px;
+        height: 53px;
+    }
+}

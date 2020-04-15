@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="35px" viewBox="0 0 35 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>实时定位-图例</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="9.5" cy="9.5" r="9.5"></circle>
+        <filter x="-60.5%" y="-50.0%" width="221.1%" height="221.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="1.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.179478463   0 0 0 0 0.218085817   0 0 0 0 0.286352041  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="SFA8.5web图标" transform="translate(-828.000000, -455.000000)">
+            <g id="Group-33" transform="translate(836.000000, 461.000000)">
+                <g id="实时定位-图例">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use stroke="#FFFFFF" stroke-width="3" fill="#008AF6" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

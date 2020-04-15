@@ -1,0 +1,166 @@
+.visit-plan-manager-container {
+  display: flex;
+  height: 100%;
+  padding: 10px;
+}
+
+.visit-plan-manager-container>div {
+  flex: 1;
+}
+
+.visit-plan-manager-container .tree-view-container {
+  min-width: 250px;
+  max-width: 250px;
+  height: 100%;
+}
+
+.visit-plan-manager-container .tree-view-container .tree-container {
+  height: calc(100% - 46px);
+  overflow: auto;
+}
+
+.visit-plan-manager-container .tree-view-container .filter {
+  padding: 0 10px 0 0;
+}
+
+.visit-plan-manager-container .visit-plan-container {
+  position: relative;
+  width: 440px;
+}
+
+.visit-plan-manager-container .import-export-container {
+  position: absolute;
+  right: 10px;
+  top: -5px;
+  z-index: 1;
+}
+
+.visit-plan-manager-container .map-container {
+  position: relative;
+  height: 100%;
+  margin-left: 10px;
+  border: 1px solid #E5E5E5;
+}
+
+.visit-plan-manager-container .plan-container {
+  display: flex;
+  border-left: 1px solid #E5E5E5;
+  height: 100%;
+}
+
+.visit-plan-manager-container .plan-container>div {
+  flex: 1;
+}
+
+.visit-plan-manager-container .plan-container .plan-list {
+  max-width: 280px;
+  min-width: 280px;
+  /*height: 100%;*/
+  border-bottom: 1px solid #E5E5E5;
+  border-right: 1px solid #E5E5E5;
+}
+
+.visit-plan-manager-container .plan-container .plan-list>.title {
+  border: 1px solid #E5E5E5;
+  border-right: none;
+  text-align: center;
+}
+
+.visit-plan-manager-container .plan-container .plan-list>.title .date-type-switch {
+  margin: 10px;
+}
+
+.visit-plan-manager-container .plan-container .plan-list>.title label {
+  margin: 0;
+}
+
+.visit-plan-manager-container .plan-container .plan-list>.title .el-radio-button__inner {
+  padding: 8px 15px;
+}
+
+.visit-plan-manager-container .plan-container .plan-list>.title .switch-btn-container {
+  line-height: 20px;
+  margin-top: 15px;
+  margin-right: 5px;
+}
+
+.visit-plan-manager-container .plan-container .plan-list>.title .week-switch-btn-container {
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .week-container {
+  height: calc(100% - 86px);
+  overflow: auto;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .week-container .day-item {
+  padding: 0 15px;
+  border-bottom: 1px solid #E5E5E5;
+  line-height: 33px;
+  cursor: pointer;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .week-container .day-item.active {
+  background-color: #608FE9;
+  color: #fff;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .week-container .day-item .label {
+  display: inline-block;
+  padding: 0 8px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  line-height: 20px;
+  color: #fff;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .week-container .day-item .type1 {
+  background-color: #818DCF;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .week-container .day-item .type2 {
+  background-color: #E9664D;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .week-container .day-item .type3 {
+  background-color: #E0C12C;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .prev, .plan-container .plan-list .next {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  border: 2px solid #757575;
+  border-radius: 50%;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .prev {
+  background: url(../images/arrow_left.png) no-repeat center center;
+}
+
+.visit-plan-manager-container .plan-container .plan-list .next {
+  background: url(../images/arrow_right.png) no-repeat center center;
+}
+
+.visit-plan-manager-container .customer-container {
+  width: 200px;
+  height: 100%;
+}
+
+.visit-plan-manager-container .customer-container .list-container {
+  height: 100%;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.visit-plan-manager-container .customer-container .list-container .table-container {
+  /*height: calc(100% - 98px);*/
+  overflow: auto;
+}

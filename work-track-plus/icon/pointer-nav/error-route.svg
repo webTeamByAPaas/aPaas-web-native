@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="15px" viewBox="0 0 31 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>异常路线-图例</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M3.75202067,2.72727273 L19.3614404,2.72727273" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SFA8.5web图标" transform="translate(-836.000000, -464.000000)">
+            <g id="Group-68-Copy-2" transform="translate(840.000000, 462.000000)">
+                <g id="异常路线-图例" transform="translate(0.000000, 7.000000)">
+                    <g id="Line-10" stroke-linecap="square">
+                        <use stroke="#838383" stroke-width="14.4" xlink:href="#path-1"></use>
+                        <use stroke="#A9A9A9" stroke-width="9.36" xlink:href="#path-1"></use>
+                    </g>
+                    <polyline id="Path" stroke="#FFFFFF" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.828427, 2.828427) rotate(-315.000000) translate(-2.828427, -2.828427) " points="0.828427125 0.828427125 4.82842712 0.828427125 4.82842712 4.82842712"></polyline>
+                    <polyline id="Path-Copy" stroke="#FFFFFF" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" transform="translate(10.828427, 2.828427) rotate(-315.000000) translate(-10.828427, -2.828427) " points="8.82842712 0.828427125 12.8284271 0.828427125 12.8284271 4.82842712"></polyline>
+                    <polyline id="Path-Copy-2" stroke="#FFFFFF" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" transform="translate(17.828427, 2.828427) rotate(-315.000000) translate(-17.828427, -2.828427) " points="15.8284271 0.828427125 19.8284271 0.828427125 19.8284271 4.82842712"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
