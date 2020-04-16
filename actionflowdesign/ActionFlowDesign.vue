@@ -1,11 +1,9 @@
 <template>
-  <div class="xt-actionflowdesign">
-    <div v-if="easyFlowVisible">
-        <el-row>
-            <!--顶部工具菜单-->
-            <!-- <el-col :span="24">
+  <div :style="viewStyle" class="xt-actionflowdesign">
+    <div v-if="easyFlowVisible" style="height:100%">
+        <!-- <el-row>
+            <el-col :span="24">
                 <div class="flow-tooltar">
-                    {{data.name}}
                     <el-button icon="el-icon-document" @click="dataInfo(false)" size="mini">流程设计图</el-button>
                     <el-button icon="el-icon-document" @click="dataInfo(true)" size="mini">流程数据</el-button>
                     <el-button @click="dataReloadA" icon="el-icon-refresh" size="mini">切换流程A</el-button>
@@ -17,16 +15,22 @@
                       <span>连线终点:[{{lineEnd.name}}]</span>
                     </div>
                     <el-button @click="setLine" icon="el-icon-edit-outline" size="mini">设置连线</el-button>
+                    <el-button icon="el-icon-document" @click="checkFlow" size="mini">校验</el-button>
+                    <el-button icon="el-icon-document" @click="executeFlow" size="mini">执行</el-button>
                 </div>
-            </el-col> -->
-        </el-row>
+            </el-col>
+        </el-row> -->
+        <div class="float-tools">
+          <el-button class="tool-btn" icon="el-icon-document" @click="checkFlow" size="mini">校验</el-button>
+          <el-button class="tool-btn" icon="el-icon-document" @click="executeFlow" size="mini">执行</el-button>
+        </div>
         <div class="flow-main">
             <!--左侧可以拖动的菜单-->
             <div class="flow-nodemenu-tool g4" ref="nodeMenu">
                 <node-menu @addNode="addNode"></node-menu>
             </div>
             <div class="flow-action-content g20">
-                <el-row>
+                <!-- <el-row> -->
                     <!--画布-->
                     <!-- <el-col :span="16"> -->
                         <div id="flowContainer" ref="flowContainer" class="flowContainer">
@@ -46,7 +50,7 @@
                             </template>
                         </div>
                     <!-- </el-col> -->
-                </el-row>
+                <!-- </el-row> -->
             </div>
         </div>
         <!-- 流程数据详情 -->
@@ -56,7 +60,7 @@
 </template>
 
 <script>
-// import XtWeb from 'xtion-web'
+import XtWeb from 'xtion-web'
 import './style.less'
 import { jsPlumb } from 'jsplumb'
 import { easyFlowMixin } from './easy_flow_mixin'
@@ -71,7 +75,7 @@ import getDataC from './mock/dataC'
 
 export default {
   // 一些基础配置移动该文件中
-  mixins: [easyFlowMixin],
+  mixins: [XtWeb.Widget.UI.View, easyFlowMixin],
   components: {
     // draggable,
     // FlowNodeForm,
@@ -288,6 +292,7 @@ export default {
         left: left + 'px',
         top: top + 'px',
         ico: nodeMenu.ico,
+        check: 'undo', // undo: 不显示，pass:通过，fail:失败
         show: true
       }
       /**
@@ -389,9 +394,14 @@ export default {
     },
     // 加载流程图
     dataReload (data) {
+      // TODO: this.data.lineList响应数据也被情况，所以使用this.tempLineList做全局记录下来上次所有连线数据
+      // this.jsPlumb.getAllConnections().forEach(conn => {
+      //   this.jsPlumb.deleteConnection(conn)
+      // })
       this.easyFlowVisible = false
-      // this.data.nodeList = []
-      // this.data.lineList = []
+      this.data.nodeList = []
+      this.data.lineList = []
+      data = JSON.parse(JSON.stringify(data))
       this.$nextTick(() => {
         data = cloneDeep(data)
         this.easyFlowVisible = true
@@ -474,6 +484,16 @@ export default {
       }
       // 清除连线记录
       this.clearRecordLink()
+    },
+    // @ 校验流程
+    checkFlow () {
+      this.$emit('checkflow', true)
+    },
+    // @ 执行流程
+    executeFlow () {
+      // this.checkFlow()
+      this.executeEvent('executeflow', this, {}, function () {})
+      // this.$emit('test')
     }
   }
 }

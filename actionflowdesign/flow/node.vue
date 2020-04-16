@@ -31,7 +31,10 @@
         <div class="flow-node-text" :show-overflow-tooltip="true">
             {{node.name}}
         </div>
-
+        <div class="flow-node-right-ico" v-if="!mouseEnter && node.check && node.check !== 'undo'">
+            <i v-show="node.check && node.check === 'pass'" class="el-icon-circle-check"></i>
+            <i v-show="node.check && node.check === 'fail'" class="el-icon-circle-cross"></i>
+        </div>
         <div class="flow-node-right-ico" v-if="mouseEnter" @click="deleteNode">
             <i class="el-icon-delete"></i>
         </div>
@@ -49,6 +52,11 @@ export default {
       // 控制节点操作显示
       mouseEnter: false,
       stateImg: require('../assets/ok.png')
+    }
+  },
+  watch: {
+    node (newVal, oldVal) {
+      debugger
     }
   },
   computed: {

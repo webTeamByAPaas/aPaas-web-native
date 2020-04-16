@@ -62,6 +62,7 @@ export default {
               ico: 'el-icon-menu',
               // 自定义覆盖样式
               style: {},
+              check: 'undo', // nudo: 不显示，pass:通过，fail:失败
               show: true
             },
             {
@@ -71,6 +72,7 @@ export default {
               ico: 'el-icon-share',
               // 自定义覆盖样式
               style: {},
+              check: 'undo', // nudo: 不显示，pass:通过，fail:失败
               show: true
             },
             {
@@ -80,6 +82,7 @@ export default {
               ico: 'el-icon-message',
               // 自定义覆盖样式
               style: {},
+              check: 'undo', // nudo: 不显示，pass:通过，fail:失败
               show: true
             },
             {
@@ -89,15 +92,27 @@ export default {
               ico: 'el-icon-information',
               // 自定义覆盖样式
               style: {},
+              check: 'undo', // nudo: 不显示，pass:通过，fail:失败
               show: true
             },
             {
               id: 'node_07',
+              type: 'importNode',
+              name: '导入',
+              ico: 'el-icon-edit',
+              // 自定义覆盖样式
+              style: {},
+              check: 'undo', // nudo: 不显示，pass:通过，fail:失败
+              show: true
+            },
+            {
+              id: 'node_08',
               type: 'exportNode',
               name: '导出',
               ico: 'el-icon-upload2',
               // 自定义覆盖样式
               style: {},
+              check: 'undo', // nudo: 不显示，pass:通过，fail:失败
               show: true
             }
           ]
@@ -115,6 +130,7 @@ export default {
               ico: 'el-icon-minus',
               // 自定义覆盖样式
               style: {},
+              check: 'undo', // nudo: 不显示，pass:通过，fail:失败
               show: true
             },
             {
@@ -124,6 +140,7 @@ export default {
               ico: 'el-icon-more',
               // 自定义覆盖样式
               style: {},
+              check: 'undo', // nudo: 不显示，pass:通过，fail:失败
               show: true
             }
           ]

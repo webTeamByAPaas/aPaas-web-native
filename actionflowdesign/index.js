@@ -39,7 +39,7 @@ export default {
   methods: {
     // 通过trigger type分发事件
     executeEvent (triggerType, eventTarget, data, callback) {
-      if (this.nodeTypeMap[data.type]) {
+      if (data && this.nodeTypeMap[data.type]) {
         // 判断是节点点击事件，记录当前点击节点
         this.currentClickNode = data
       }
@@ -74,7 +74,7 @@ export default {
         case 'getCurrentClickNode':
           try {
             targetData = {
-              nodedate: this.currentClickNode,
+              nodedata: this.currentClickNode,
               viewdata: this.flowViewData.nodeView[this.currentClickNode.id] || null
             }
           } catch (e) {
@@ -91,6 +91,12 @@ export default {
       return targetData
     },
     setView (data, type, setter) {
+      // 判断data返回的类型
+      if (data &&
+          typeof data === 'string' &&
+          (data.indexOf('{') !== -1 || data.indexOf('\\{') !== -1 || data.indexOf('[') !== -1 || data.indexOf('\\[') !== -1)) {
+        data = JSON.parse(data)
+      }
       let targetType = ''
       if (setter && setter.ctrl && setter.ctrl.component) {
         targetType = setter.ctrl.component
@@ -111,8 +117,17 @@ export default {
           // }
           if (data) {
             // 编辑
-            this.flowData = data.flowData
-            this.flowViewData = data.flowViewData
+            try {
+              this.flowData = data.flowData
+              this.flowViewData = data.flowViewData
+              // TODO：
+              // 1、dataReload绘图不能传入监听对象结构
+              // 2、不能短时间重复调用，必须渲染完成上一次操作。
+              let fd = JSON.parse(JSON.stringify(this.flowData))
+              this.$refs[this.viewRule.code] && this.$refs[this.viewRule.code].dataReload(fd)
+            } catch (e) {
+              console.error('[数据异常]：data结构不是 { flowData:{...}, flowViewData: {...}}')
+            }
           } else {
             // 新增
           }
@@ -126,22 +141,31 @@ export default {
           let id = data.nodedata.id
           // 更新流程节点name
           this.flowData.nodeList.forEach(node => {
-            node.name = data.nodedata.name
+            if (node.id === data.nodedata.id) {
+              node.name = data.nodedata.name
+            }
           })
           // 更新节点视图数据
-          this.flowViewData.nodeView[id] = data.viewdata
+          if (data.viewdata) {
+            this.flowViewData.nodeView[id] = data.viewdata
+          }
           break
         default:
           if (data) {
             try {
               this.flowData = data.flowData
               this.flowViewData = data.flowViewData
+              // this.$refs[this.viewRule.code] && this.$refs[this.viewRule.code].dataReload(this.flowData)
             } catch (e) {
               console.error('[数据异常]：data结构不是 { flowData:{...}, flowViewData: {...}}')
             }
           }
           break
       }
+      // 数据改变，重新绘制流程图
+      // TODO: 不能传双向绑定数据进来绘图，所以转换一层
+      // let fd = JSON.parse(JSON.stringify(this.flowData))
+      // this.$refs[this.viewRule.code] && this.$refs[this.viewRule.code].dataReload(fd)
     }
   },
   render (h) {
@@ -153,7 +177,20 @@ export default {
         flowViewData: this.flowViewData,
         executeEvent: this.executeEvent
       },
+      ref: this.viewRule.code,
       on: {
+        checkflow: (status, targetArr) => {
+          // check: 'undo', // nudo: 不显示，pass:通过，fail:失败
+          this.flowData.nodeList.forEach((node) => {
+            node.check = 'pass'
+          })
+          // 校验规则
+          // 选择节点只能开1条分支
+          // 拆分节点，客群节点可以任意分支
+          // 与，或节点分支至少1条分支
+          // 导出节点只能做接入
+          // this.flowData.lineList
+        },
         updateflowdata: (data) => {
           this.flowData = data
         },
