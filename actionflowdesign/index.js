@@ -28,6 +28,7 @@ export default {
       'splitNode': true,
       'commNode': true,
       'userNode': true,
+      'importNode': true,
       'exportNode': true,
       'andNode': true,
       'orNode': true
