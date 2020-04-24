@@ -60,6 +60,8 @@ export default {
               type: 'selectNode',
               name: '选择',
               ico: 'el-icon-menu',
+              // 执行结果内容
+              result: '',
               // 自定义覆盖样式
               style: {},
               check: 'undo', // nudo: 不显示，pass:通过，fail:失败
@@ -70,6 +72,8 @@ export default {
               type: 'splitNode',
               name: '拆分',
               ico: 'el-icon-share',
+              // 执行结果内容
+              result: '',
               // 自定义覆盖样式
               style: {},
               check: 'undo', // nudo: 不显示，pass:通过，fail:失败
@@ -80,6 +84,8 @@ export default {
               type: 'commNode',
               name: '沟通',
               ico: 'el-icon-message',
+              // 执行结果内容
+              result: '',
               // 自定义覆盖样式
               style: {},
               check: 'undo', // nudo: 不显示，pass:通过，fail:失败
@@ -89,7 +95,9 @@ export default {
               id: 'node_06',
               type: 'userNode',
               name: '客群',
-              ico: 'el-icon-information',
+              ico: 'el-icon-star-on',
+              // 执行结果内容
+              result: '',
               // 自定义覆盖样式
               style: {},
               check: 'undo', // nudo: 不显示，pass:通过，fail:失败
@@ -100,6 +108,8 @@ export default {
               type: 'importNode',
               name: '导入',
               ico: 'el-icon-edit',
+              // 执行结果内容
+              result: '',
               // 自定义覆盖样式
               style: {},
               check: 'undo', // nudo: 不显示，pass:通过，fail:失败
@@ -110,6 +120,8 @@ export default {
               type: 'exportNode',
               name: '导出',
               ico: 'el-icon-upload2',
+              // 执行结果内容
+              result: '',
               // 自定义覆盖样式
               style: {},
               check: 'undo', // nudo: 不显示，pass:通过，fail:失败
@@ -128,6 +140,8 @@ export default {
               type: 'andNode',
               name: '与',
               ico: 'el-icon-minus',
+              // 执行结果内容
+              result: '',
               // 自定义覆盖样式
               style: {},
               check: 'undo', // nudo: 不显示，pass:通过，fail:失败
@@ -138,6 +152,8 @@ export default {
               type: 'orNode',
               name: '或',
               ico: 'el-icon-more',
+              // 执行结果内容
+              result: '',
               // 自定义覆盖样式
               style: {},
               check: 'undo', // nudo: 不显示，pass:通过，fail:失败

@@ -23,20 +23,23 @@
         <!--            {{node.name}}-->
         <!--        </div>-->
         <div class="flow-node-left"></div>
-
-        <div class="flow-node-left-ico flow-node-drag">
-            <i :class="nodeIcoClass"></i>
-        </div>
-
-        <div class="flow-node-text" :show-overflow-tooltip="true">
-            {{node.name}}
-        </div>
-        <div class="flow-node-right-ico" v-if="!mouseEnter && node.check && node.check !== 'undo'">
-            <i v-show="node.check && node.check === 'pass'" class="el-icon-circle-check"></i>
-            <i v-show="node.check && node.check === 'fail'" class="el-icon-circle-cross"></i>
-        </div>
-        <div class="flow-node-right-ico" v-if="mouseEnter" @click="deleteNode">
-            <i class="el-icon-delete"></i>
+        <div class="flow-node-main">
+            <div style="display:flex">
+                <div class="flow-node-left-ico flow-node-drag">
+                    <i :class="nodeIcoClass"></i>
+                </div>
+                <div class="flow-node-text" :show-overflow-tooltip="true">
+                    {{node.name}}
+                </div>
+                <div class="flow-node-right-ico" v-if="!mouseEnter && node.check && node.check !== 'undo'">
+                    <i v-show="node.check && node.check === 'pass'" class="el-icon-circle-check"></i>
+                    <i v-show="node.check && node.check === 'fail'" class="el-icon-circle-cross"></i>
+                </div>
+                <div class="flow-node-right-ico" v-if="mouseEnter" @click="deleteNode">
+                    <i class="el-icon-delete"></i>
+                </div>
+            </div>
+            <div class="flow-node-result" >{{node.result}}</div>
         </div>
     </div>
 </template>
@@ -55,9 +58,7 @@ export default {
     }
   },
   watch: {
-    node (newVal, oldVal) {
-      debugger
-    }
+    node (newVal, oldVal) {}
   },
   computed: {
     // 节点容器样式
@@ -137,6 +138,16 @@ export default {
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
     }
+    .flow-node-main {
+        display:flex;
+        flex-direction: column;
+    }
+    .flow-node-result {
+        margin-left:8px;
+        margin-bottom: 4px;
+        font-size:11px;
+        color: #989898;
+    }
 
     /* 修改、删除按钮样式*/
     .flow-node-operate {
@@ -150,10 +161,11 @@ export default {
         position: absolute;
         display: flex;
         width: 170px;
-        height: 35px;
+        /* height: 35px; */
         border: 1px solid #E0E3E7;
         border-radius: 5px;
         background-color: #fff;
+        flex-direction: row;
     }
 
     .flow-node-container:hover {

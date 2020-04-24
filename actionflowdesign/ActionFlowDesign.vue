@@ -1,5 +1,5 @@
 <template>
-  <div :style="viewStyle" class="xt-actionflowdesign">
+  <div :style="viewStyle" class="xt-actionflowdesign" ref="xtactionflowbody">
     <div v-if="easyFlowVisible" style="height:100%">
         <!-- <el-row>
             <el-col :span="24">
@@ -20,16 +20,18 @@
                 </div>
             </el-col>
         </el-row> -->
-        <div class="float-tools">
-          <el-button class="tool-btn" icon="el-icon-document" @click="checkFlow" size="mini">校验</el-button>
-          <el-button class="tool-btn" icon="el-icon-document" @click="executeFlow" size="mini">执行</el-button>
+        <div class="float-tools" v-if="!isHideTools">
+          <!-- <el-button class="tool-btn" icon="el-icon-document" @click="checkFlow" size="mini">校验</el-button> -->
+          <!-- <el-button class="tool-btn" icon="el-icon-document" @click="executeFlow" size="mini">执行</el-button> -->
+          <div class="tool-btn" @click="checkFlow">校验</div>
+          <div class="tool-btn" @click="executeFlow">执行</div>
         </div>
         <div class="flow-main">
             <!--左侧可以拖动的菜单-->
-            <div class="flow-nodemenu-tool g4" ref="nodeMenu">
+            <div class="flow-nodemenu-tool g4" ref="nodeMenu" v-if="!isHideTools">
                 <node-menu @addNode="addNode"></node-menu>
             </div>
-            <div class="flow-action-content g20">
+            <div class="flow-action-content" :class="{'g20': !isHideTools, 'g24': isHideTools}">
                 <!-- <el-row> -->
                     <!--画布-->
                     <!-- <el-col :span="16"> -->
@@ -85,7 +87,8 @@ export default {
     value: String,
     executeEvent: Function,
     flowData: Object,
-    flowViewData: Object
+    flowViewData: Object,
+    isHideTools: Boolean
   },
   data () {
     return {
@@ -292,6 +295,7 @@ export default {
         left: left + 'px',
         top: top + 'px',
         ico: nodeMenu.ico,
+        result: '待执行',
         check: 'undo', // undo: 不显示，pass:通过，fail:失败
         show: true
       }
@@ -491,9 +495,8 @@ export default {
     },
     // @ 执行流程
     executeFlow () {
-      // this.checkFlow()
+      this.$emit('executeflow')
       this.executeEvent('executeflow', this, {}, function () {})
-      // this.$emit('test')
     }
   }
 }

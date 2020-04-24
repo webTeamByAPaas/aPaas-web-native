@@ -18,7 +18,8 @@ export default {
       flowViewData: {
         name: '活动流程',
         nodeView: {}
-      }
+      },
+      isHideTools: false
     }
   },
   created () {
@@ -44,11 +45,6 @@ export default {
         // 判断是节点点击事件，记录当前点击节点
         this.currentClickNode = data
       }
-      // 改写，针对native组件的协议结构解析调用协议事件
-      // console.log(triggerType)
-      // console.log(eventTarget)
-      // console.log(data)
-      // console.log(callback)
       if (!this.eventList) return
       for (let event of this.eventList) {
         if (event.trigger === triggerType && event.handler) {
@@ -57,7 +53,9 @@ export default {
         }
       }
     },
+    // @ 组件通信
     getView (type, getter) {
+      // Page.getCtrl('流程').getValue(CtrlValueGetter('getCurrentClickNode'))
       // type对应component单个取值，如果是整个取值则需要对应从getter中解析关系
       let targetData
       let targetType = ''
@@ -91,7 +89,9 @@ export default {
       }
       return targetData
     },
+    // @ 组件通信
     setView (data, type, setter) {
+      // Page.getCtrl('流程').setValue(currentClickNode, CtrlValueSetter('setCurrentViewData'))
       // 判断data返回的类型
       if (data &&
           typeof data === 'string' &&
@@ -103,6 +103,14 @@ export default {
         targetType = setter.ctrl.component
       }
       switch (targetType) {
+        case 'hideTools':
+          // 隐藏工具栏
+          this.isHideTools = true
+          break
+        case 'showTools':
+          // 隐藏工具栏
+          this.isHideTools = false
+          break
         case 'setFlowInfo':
           // 新建 or 编辑 给设计器赋值，结构如下
           // data = {
@@ -176,7 +184,8 @@ export default {
         ...this.logicExpression(this.viewRule),
         flowData: this.flowData,
         flowViewData: this.flowViewData,
-        executeEvent: this.executeEvent
+        executeEvent: this.executeEvent,
+        isHideTools: this.isHideTools
       },
       ref: this.viewRule.code,
       on: {
@@ -191,6 +200,14 @@ export default {
           // 与，或节点分支至少1条分支
           // 导出节点只能做接入
           // this.flowData.lineList
+        },
+        executeflow: (status, targetArr) => {
+          // check: 'undo', // nudo: 不显示，pass:通过，fail:失败
+          this.flowData.nodeList.forEach((node) => {
+            if (node.result === '待执行') {
+              node.result = ''
+            }
+          })
         },
         updateflowdata: (data) => {
           this.flowData = data
