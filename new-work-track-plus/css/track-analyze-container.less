@@ -1,0 +1,118 @@
+.track-analyze-container {
+    height: 100%;
+    & > header {
+        display: flex;
+        height: 56px;
+        align-items: center;
+        padding: 0 13px;
+        border-bottom: 1px solid #ccc;
+
+        .icon {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        & > article{
+            flex: 1
+        }
+
+        .el-select{
+            width: 100px;
+        }
+    }
+
+    & > ul {
+        padding: 20px 12px 0 10px;
+        height: calc(~"100% - 56px");
+        overflow-y: auto;
+    }
+
+    .track-analyze-item {
+        list-style-type: none;
+        display: flex;
+        &.track-analyze-item-last{
+            .track-analyze-item-left{
+                transform: translateY(4px);
+            }
+        }
+    }
+
+    .track-analyze-item-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 56px;
+
+        & > h3 {
+            font-size: 17px;
+            color: #116FDC;
+            margin: 0 0 0;
+        }
+
+        & > article{
+            font-size: 12px;
+            transform: scale(0.8);
+            color: #656565;
+            white-space: nowrap;
+        }
+    }
+
+    .track-analyze-item-mid {
+        display: flex;
+        width: 40px;
+        flex-direction: column;
+        align-items: center;
+
+        .line {
+            width: 2px;
+            flex: 1;
+            background-color: #ccc;
+        }
+    }
+
+    .track-analyze-item-right {
+        width: 200px;
+        margin-left: 10px;
+        flex: 1;
+        background-color: #F5F6FA;
+        padding: 13px 15px;
+        position: relative;
+
+        &.pointer{
+            cursor: pointer;
+        }
+
+        &:before{
+            content: "";
+            display: block;
+            position: absolute;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 6px solid #F5F6FA;
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        & > h4 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #262626;
+            margin: 0 0 10px;
+        }
+
+        & > article {
+            font-size: 12px;
+            color: #1A1A1A;
+        }
+    }
+    .spacer {
+        width: 200px;
+    }
+
+    .empty-container{
+        padding: 30px;
+        text-align: center;
+    }
+}

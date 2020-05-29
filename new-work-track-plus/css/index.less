@@ -1,0 +1,62 @@
+/*bsPager*/
+.page-work-track-plus {
+    display: flex;
+    height: 100%;
+
+    .btn-toggle-show{
+        position: absolute;
+        width: 10px;
+        height: 80px;
+        top: 50%;
+        margin-top: -130px;
+        right: 0;
+        cursor: pointer;
+
+        .bg {
+            height: 80px;
+            width: 11px;
+            & > img{
+                width: 11px;
+            }
+        }
+    }
+}
+
+.member-list-container {
+    width: 300px;
+    position: relative;
+    &.hide-width {
+        width: 10px;
+    }
+}
+
+.work-track-main-container {
+    width: calc(~"100% - 300px");
+    overflow: hidden;
+
+    .el-tabs{
+        height: 100%;
+    }
+
+    .el-tabs__header{
+        margin: 0 0 10px;
+    }
+
+    .el-tabs__content{
+        height: calc(~"100% - 60px");
+    }
+
+    .el-tab-pane{
+        height: 100%;
+    }
+    &.hide-width {
+        width: calc(~"100% - 10px");
+    }
+}
+
+@import "./icon.less";
+@import "./search-user-menu.less";
+@import "./track-map.less";
+@import "./track-data-container.less";
+@import "./track-analyze-container.less";
+@import "./compare-map.less";

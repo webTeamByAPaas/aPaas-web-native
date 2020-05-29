@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>考勤</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="14.8799112" cy="14.9439718" r="14.8101266"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SFA8.5web图标" transform="translate(-49.000000, -214.000000)">
+            <g id="考勤" transform="translate(49.000000, 214.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <circle stroke="#4CC22B" stroke-width="2" cx="14.8799112" cy="14.9439718" r="13.8101266"></circle>
+                <g id="Group-7" mask="url(#mask-2)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.55172414">
+                    <g transform="translate(7.215190, 7.215190)">
+                        <path d="M0,10.5229847 C1.08582143,8.435441 0.593377834,7.04076767 1.29104582,4.96413266 C2.04085587,2.73229486 2.72818121,2.33844104 2.72818121,2.33844104" id="Path-1286"></path>
+                        <path d="M4.67688208,0.660076461 C4.67688208,0.660076461 8.36887247,-0.825095585 11.0525972,0.660076474 C13.736322,2.14524853 14.8101266,4.91848555 14.8101266,7.01532312" id="Path-1287"></path>
+                        <path d="M14.4203864,9.74350433 C14.4203864,9.74350433 14.4062062,11.1962492 13.6409061,13.6409061" id="Path-1292"></path>
+                        <path d="M2.72818121,12.9946698 C3.22119849,12.3425277 3.88050854,11.2091924 4.25750872,9.48322706 C4.91396134,6.47788507 4.44905964,3.50766149 8.05954887,3.50766156 C11.6700381,3.50766163 11.7123516,8.15335512 10.8166501,11.1047202 C10.4363291,12.3578903 9.81139827,13.963294 8.91160701,15.5896069" id="Path-1291"></path>
+                        <path d="M7.7843444,7.01532312 C7.7843444,7.01532312 8.11437684,11.1505783 5.06662225,15.1998668" id="Path-1293"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

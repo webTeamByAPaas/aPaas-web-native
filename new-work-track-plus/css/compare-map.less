@@ -1,0 +1,78 @@
+.compare-map-container {
+    height: 100%;
+}
+
+.compare-map-search-nav {
+    padding-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+    .compare-map-search-nav-left {
+        display: flex;
+        width: 400px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    label.el-checkbox {
+        margin: 0;
+
+        .el-checkbox__label {
+            font-size: 12px;
+        }
+    }
+
+    .el-date-editor.el-input {
+        width: 200px;
+    }
+}
+
+.compare-map-main-container {
+    height: calc(~"100% - 40px");
+    display: flex;
+    border-top: 1px solid #ccc;
+    position: relative;
+
+    .gaode-map-section {
+        flex: 1;
+        overflow-x: auto;
+        border-right: 1px solid #ccc;
+
+        .gaode-map {
+            height: calc(~"100% - 44px");
+        }
+
+        .pointer-footer {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #1A1A1A;
+            padding-right: 4px;
+            .pointer-icon{
+                display: flex;
+                align-items: center;
+                .icon{
+                    margin-right: 4px;
+                }
+                & + .pointer-icon{
+                    margin-left: 15px;
+                }
+                & > span{
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+
+    .top-left-info{
+        padding: 4px 2px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(225, 225, 225, 0.8);
+    }
+}
+
+
