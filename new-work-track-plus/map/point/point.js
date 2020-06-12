@@ -4,12 +4,12 @@ let getInfoWindow
 let zIndex = 101
 let openInfoMarker
 
-export function initPoint() {
+export function initPoint () {
     getInfoWindow = initInfoWindow.call(this)
 }
 
 // 信息窗体单例
-function initInfoWindow() {
+function initInfoWindow () {
     let single
 
     if (!single) {
@@ -23,7 +23,7 @@ function initInfoWindow() {
         })
     }
 
-    function get() {
+    function get () {
         return single
     }
 
@@ -31,21 +31,29 @@ function initInfoWindow() {
 }
 
 // @ 创建点标记
-export function createPoint(data, isHide) {
+export function createPoint (data, isHide) {
     let num = 1
     let markers = []
     // TODO：data数量超过200已经会有明显卡顿感了。
     data.forEach(item => {
         if (item.position.length < 2) return
         // 被动定位类型参与画线，但不建立标记物
-        // if (item.type === 3) return
+        if (item.type === 3) return
         if (item.type === 8) num = item.visitTimes
+        // 标记物叠加顺序
+        let zIndex = 100
+        if (item.type === 99 || item.type === 100) {
+            zIndex = 102
+        }
+        if (item.type === 1 || item.type === 0) {
+            zIndex = 101
+        }
         let marker = new this.AMap.Marker(Object.assign(getContent.call(this, item.type, num), {
             map: this.map,
             position: new this.AMap.LngLat(item.position[0], item.position[1]),
             extData: item,
             visible: !isHide,
-            zIndex: 100
+            zIndex: zIndex
         }))
         this.AMap.event.addListener(marker, 'click', e => {
             openInfoWindow.call(this, e.target)
@@ -81,7 +89,7 @@ var _renderClusterMarker = function (context, thisAMap) {
     context.marker.setOffset(new thisAMap.Pixel(-size / 2, -size / 2))
     context.marker.setContent(div)
 }
-var _renderMarker = function(context, thisAMap) {
+var _renderMarker = function (context, thisAMap) {
     var content = '<div style="background-color: hsla(180, 100%, 50%, 0.3); height: 18px; width: 18px; border: 1px solid hsl(180, 100%, 40%); border-radius: 12px; box-shadow: hsl(180, 100%, 50%) 0px 0px 3px;"></div>'
     var offset = new thisAMap.Pixel(-9, -9)
     context.marker.setContent(content)
@@ -89,16 +97,15 @@ var _renderMarker = function(context, thisAMap) {
 }
 
 // @ 标记点聚合处理
-export function createMarkersByPoint(data) {
-    let newViewData = {}
+export function createMarkersByPoint (data) {
     let now_bounds = this.map.getBounds()
     let markers = this.createPoint(data)
     let _this = this
     count = data.length
     let cluster = new this.AMap.MarkerClusterer(this.map, markers, {
         gridSize: 80,
-        renderClusterMarker: function(context) { _renderClusterMarker(context, _this.AMap) }, // 自定义聚合点样式
-        renderMarker: function(context) { _renderMarker(context, _this.AMap) }, // 自定义非聚合点样式
+        renderClusterMarker: function (context) { _renderClusterMarker(context, _this.AMap) }, // 自定义聚合点样式
+        renderMarker: function (context) { _renderMarker(context, _this.AMap) }, // 自定义非聚合点样式
         minClusterSize: 1,
         maxZoom: 14
     })
@@ -109,33 +116,38 @@ export function createMarkersByPoint(data) {
 }
 
 // 信息窗体内容
-function getInfoWindowContent(params = {}) {
+function getInfoWindowContent (params = {}) {
     let { label, time, address } = params
     let arr = []
     if (time) arr.push(`<p>时间：${time}</p>`)
     if (address) arr.push(`<p>地点：${address}</p>`)
     return `<div class="amapplus-window-content">
                 <h3>${label}</h3>
+                <div class="content">
                 ${arr.join('')}
+                </div>
             </div>`
 }
 
-export function openInfoWindow(marker) {
+export function openInfoWindow (marker) {
     let item = marker.getExtData()
     if (item.position.length < 2) return
     let popInfo = getInfoWindow()
-    popInfo.setContent(getInfoWindowContent({
+    let content = {
         label: item.axis_label,
-        time: item.timeHHMM,
         address: item.address
-    }))
+    }
+    if (item.timeHHMM) {
+        content['time'] = item.timeHHMM
+    }
+    popInfo.setContent(getInfoWindowContent(content))
     popInfo.open(this.map, new this.AMap.LngLat(item.position[0], item.position[1]))
     if (openInfoMarker) openInfoMarker.setzIndex(100)
     marker.setzIndex(9999)
     openInfoMarker = marker
 }
 
-export function closeInfoWindow() {
+export function closeInfoWindow () {
     let popInfo = getInfoWindow()
     popInfo.close()
 }

@@ -22,22 +22,44 @@ export function getContent(type, num) {
         case 8:
             result = realPointerContent.call(this, num)
             break
+        case 99:
+            // 起点
+            result = startPointerContent.call(this, num)
+            break
+        case 100:
+            // 终点
+            result = endPointerContent.call(this, num)
+            break
         default:
             result = monitorPointerContent.call(this)
     }
     return result
 }
 
-export function planPointerContent(num = 1) {
+export function startPointerContent () {
     return {
-        offset: new this.AMap.Pixel(-20, -53),
+        offset: new this.AMap.Pixel(-16, -53),
+        content: `<i class="icon icon-start-map"></i>`
+    }
+}
+
+export function endPointerContent () {
+    return {
+        offset: new this.AMap.Pixel(-24, -53),
+        content: `<i class="icon icon-end-map"></i>`
+    }
+}
+
+export function planPointerContent (num = 1) {
+    return {
+        offset: new this.AMap.Pixel(-20, -3),
         content: `<i class="icon icon-plan-map">
             <article>${num}</article>
         </i>`
     }
 }
 
-export function realPointerContent(num = 1) {
+export function realPointerContent (num = 1) {
     return {
         offset: new this.AMap.Pixel(-20, -53),
         content: `<i class="icon icon-real-map">
@@ -48,7 +70,7 @@ export function realPointerContent(num = 1) {
 
 let o1
 
-export function monitorPointerContent() {
+export function monitorPointerContent () {
     if (o1) return o1
     o1 = {
         offset: new this.AMap.Pixel(-11, -11),
@@ -59,7 +81,7 @@ export function monitorPointerContent() {
 
 let o3
 
-export function checkPointerContent() {
+export function checkPointerContent () {
     if (o3) return o3
     o3 = {
         offset: new this.AMap.Pixel(-20, -53),
@@ -70,7 +92,7 @@ export function checkPointerContent() {
 
 let o4
 
-export function customerPointerContent() {
+export function customerPointerContent () {
     if (o4) return o4
     o4 = {
         offset: new this.AMap.Pixel(-20, -53),
@@ -81,7 +103,7 @@ export function customerPointerContent() {
 
 let o5
 
-export function stopPointerContent() {
+export function stopPointerContent () {
     if (o5) return o5
     o5 = {
         offset: new this.AMap.Pixel(-20, -53),
@@ -92,7 +114,7 @@ export function stopPointerContent() {
 
 let o6
 
-export function realPointerPlusContent() {
+export function realPointerPlusContent () {
     if (o6) return o6
     o6 = {
         offset: new this.AMap.Pixel(-20, -53),

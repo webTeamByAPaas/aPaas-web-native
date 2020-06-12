@@ -64,7 +64,7 @@ export async function createRoute(originPoints, lineStyle, isHide) {
     return new this.AMap.Polyline(PolylineParams)
 }
 
-export async function createSimpleRoute(originPoints, lineStyle, isHide) {
+export async function createSimpleRoute (originPoints, lineStyle, isHide) {
     originPoints = originPoints.filter(item => item.length >= 2)
     if (originPoints.length < 2) return
     let points = originPoints.map(item => new this.AMap.LngLat(item[0], item[1]))
@@ -79,7 +79,8 @@ export async function createSimpleRoute(originPoints, lineStyle, isHide) {
             isOutline: false,
             // strokeColor: 'rgb(204, 52, 0)', // 线颜色
             // strokeColor: 'hsla(0, 88%, 60%, 0.3)', // 线颜色
-            strokeColor: 'hsla(205, 70%, 44%, 0.8)', // 线颜色
+            // strokeColor: 'hsla(205, 70%, 44%, 0.8)', // 线颜色
+            strokeColor: lineStyle || '#5e8de9', // 线颜色
             strokeWeight: 8 // 线宽
         })
     }

@@ -67,7 +67,7 @@
                     </ul>
                 </section>
                 <section v-show="activeTrackDetail === 'track-analyze'">
-                    <track-analyze :analyzePoints="analyzePoints" :timestampRange="timestampRange" :isMonitor="isMonitor"
+                    <track-analyze :analyzePoints="analyzePoints" :timestampRange="timestampRange" :isMonitor="isMonitor" :analyzePointsRange="analyzePointsRange"
                                    @back="activeTrackDetail = 'menu'" :MapCtrl="MapCtrl"></track-analyze>
                 </section>
                 <section v-show="activeTrackDetail === 'track-data'">
@@ -88,7 +88,7 @@ import TrackAnalyze from './TrackAnalyze.vue'
 import { WorkTrackMap } from '../map/extends/work-track-map'
 import { DateCreate, currentDate, currentTime } from '../api/dealdate'
 import $ from 'jquery'
-import { forEach } from 'lodash';
+import { forEach } from 'lodash'
 
 export default {
     name: 'TrackMap',
@@ -236,7 +236,8 @@ export default {
                     item.pointDatas.forEach(point => {
                         let temp = {
                             ...item,
-                            uuid: point.uuid,
+                            // TODO：停留只有一个点，要生成标记物，uuid关联点击事件
+                            uuid: item.type === 6 ? item.uuid : point.uuid,
                             address: point.address,
                             position: [point.lng, point.lat]
                         }

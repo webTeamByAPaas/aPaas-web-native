@@ -1,5 +1,5 @@
 import { CreateMap } from '../index'
-import { _extends } from './utils'
+import { _extends, deepCopy} from './utils'
 
 import mockRealData from '../mock/realData'
 import mockAnalyzeData from '../mock/moveData'
@@ -44,19 +44,67 @@ export const WorkTrackMap = (function (_super) {
         this.realLineCollection.clear()
         // 构建点
         // analyzeData中停留点数据参与建立标记物
-        let realPointers = [...realData, ...analyzeData.filter(item => item.type === 6 && item.position.length > 0)] // 实际拜访路线的所有点
+        // 实际拜访路线的所有点
+        // 构建起点
+        let startPointer
+        let endPointer
+        if (analyzeData.length > 0) {
+            startPointer = deepCopy(analyzeData[0])
+            startPointer.axis_label = '起点'
+            startPointer.timeHHMM = ''
+            startPointer.uuid = startPointer.uuid + '-start'
+            startPointer.type = 99
+        }
+        let realPointers = [startPointer, ...realData, ...analyzeData.filter(item => item.type === 6 && item.position.length > 0)]
+        // 构建终点
+        if (analyzeData.length > 0) {
+            let len = analyzeData.length
+            endPointer = deepCopy(analyzeData[len - 1])
+            endPointer.axis_label = '终点'
+            endPointer.timeHHMM = ''
+            endPointer.uuid = endPointer.uuid + '-end'
+            endPointer.type = 100
+            realPointers.push(endPointer)
+        }
         this.realMarkers = this.createPoint(realPointers, isHide)
         this.realDataIsShow = !isHide
 
+        // 处理[不在线&定位异常】情况下，绘线坐标点
+        let offline = []
+        let s = []
+        let e = []
+        // TODO：
+        // 绘灰色线逻辑，起点定位点是‘不在线’或者‘定位异常’，终点是‘移动’或‘其他成功状态’
+        analyzeData.forEach(item => {
+            if (s.length === 0 && (item.type === 4 || item.type === 5)) {
+                s = item.position
+            }
+            if (s.length > 0 && item.type !== 4 && item.type !== 5) {
+                e = item.position
+            }
+            if (s.length > 0 && e.length > 0) {
+                offline.push(deepCopy(s))
+                offline.push(deepCopy(e))
+                s = []
+                e = []
+            }
+        })
         // 构建路线
         // analyzeData中定位数据参与路线绘制
+        // TODO：被定定位数据画线
         let positions = [
-            ...realData,
             ...analyzeData.filter(item => item.position && item.position.length > 0)
         ].map(item => item.position)
         // this.realLine = await this.createRoute(positions, null, isHide)
-        this.realLine = await this.createSimpleRoute(positions, 'blue', isHide)
+        this.realLine = await this.createSimpleRoute(positions, '#5e8de9', isHide)
         this.realLineCollection.add(this.realLine)
+        // TODO：业务数据画线
+        let businessPositions = [...realData].map(item => item.position)
+        let businessLine = await this.createSimpleRoute(businessPositions, '#5e8de9', isHide)
+        this.realLineCollection.add(businessLine)
+        // TODO：异常数据画线
+        let greyLine = await this.createSimpleRoute(offline, 'grey', isHide)
+        this.realLineCollection.add(greyLine)
 
         // 构建高亮路线
         let realMoves = analyzeData.filter(item => item.type === 3 || item.type === 4 || item.type === 5) // 移动
@@ -80,7 +128,7 @@ export const WorkTrackMap = (function (_super) {
         heightLineDataArr.forEach(async item => {
             let positions = item.points.map(_item => _item.position)
             // let route = await this.createRoute(positions, item.type, true)
-            let route = await this.createSimpleRoute(positions, 'blue', true)
+            let route = await this.createSimpleRoute(positions, '#5e8de9', true)
             this.realLineCollection.add(route)
             this.heightLightLine.push({ route, isShow: false, uuid: item.uuid })
         })

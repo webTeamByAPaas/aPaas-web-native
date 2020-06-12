@@ -138,8 +138,9 @@ export function getWorkTrackAnalyze (params) {
             新接口
                 status 1. 不在线：用于记录开始点、结束点，有可能开始点和结束点为同一个数据
                 status 2. 移动： 用于画轨迹线
-                status 3. 定位失败时：与不在线处理一样
-                status 4. 停留时，值记录这段时间中，定位点中的某一个点作为中心，停留时，只有一个数据点
+                status 3 停留时，值记录这段时间中，定位点中的某一个点作为中心
+                status 4. 定位失败时：与不在线处理一样
+                status 5. 成功定位，只有一个数据点，一个时间点
             */
             let originData = data['pl_track_status'] // TODO: 修改点
             // let isMonitor = !!data.kx_visit_monitormember
