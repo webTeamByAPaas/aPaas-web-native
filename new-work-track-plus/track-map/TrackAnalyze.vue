@@ -29,7 +29,8 @@
                 <section class="track-analyze-item-right pointer"
                     @click="handleClickRight(firstPoint, 'start')">
                     <h4>起点</h4>
-                    <article v-if="analyzePointsRange.length > 0">
+                    <!-- 起点如果是不在线或异常定位数据，则不显示起点 -->
+                    <article v-if="firstPoint.type !== 4 && firstPoint.type !== 5 && analyzePointsRange.length > 0">
                         位置:{{analyzePointsRange[0].address}}
                     </article>
                 </section>
@@ -140,6 +141,13 @@ export default {
             if (!this.selectType) return this.timePoint
             return this.timePoint.filter(item => item.type === +this.selectType)
         },
+        /**
+         * 起点读取数据，根据起点后第一个定位分析点判断：
+         *   1、不在线：读取不到定位数据，起点无数据，空
+         *   2、定位异常：读取不到定位数据，起点无数据，空
+         *   3、停留：读取停留点定位数据
+         *   4、移动：读取移动的起点定位数据
+         */
         firstPoint () {
             if (this.listPoint.length === 0) return null
             return this.listPoint[0]

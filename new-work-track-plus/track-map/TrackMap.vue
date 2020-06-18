@@ -224,13 +224,19 @@ export default {
         /*
         * 新接口定位数据结构，解析为TrackAnalyze.vue视图识别的数据结构
         * @desc 处理被定定位数据
-        * status 1. 不在线：用于记录开始点、结束点，有可能开始点和结束点为同一个数据
-        * status 2. 移动： 用于画轨迹线
-        * status 3. 定位失败时：与不在线处理一样
-        * status 4. 停留时，值记录这段时间中，定位点中的某一个点作为中心，停留时，只有一个数据点
+        * status 1.不在线（type=4）:用于记录开始点、结束点，有可能开始点和结束点为同一个数据
+        * status 2. 移动(type=3)： 用于画轨迹线
+        * status 3. 定位失败时(type=5)：与不在线处理一样
+        * status 4. 停留时(type=6)，值记录这段时间中，定位点中的某一个点作为中心，停留时，只有一个数据点
+        * 起点读取数据，根据起点后第一个定位分析点判断：
+        *   1、不在线：读取不到定位数据，起点无数据，空
+        *   2、定位异常：读取不到定位数据，起点无数据，空
+        *   3、停留：读取停留点定位数据
+        *   4、移动：读取移动的起点定位数据
         */
         compatibleAnalyzeData (analyzePoints) {
             let data = []
+            let startPoint = false
             analyzePoints.forEach(item => {
                 if (item.pointDatas.length > 0) {
                     item.pointDatas.forEach(point => {
@@ -243,7 +249,14 @@ export default {
                         }
                         delete temp.pointDatas
                         delete temp.eventDatas
-                        data.push(temp)
+                        // TODO: 起点监控时间，初始的不在线和异常定位数据不参与画线，过滤
+                        // TODO: 直到第一个停留/移动点出现
+                        if (!startPoint) {
+                            startPoint = temp.type !== 4 && temp.type !== 5
+                        }
+                        if (startPoint) {
+                            data.push(temp)
+                        }
                     })
                 } else {
                     data.push(item)
