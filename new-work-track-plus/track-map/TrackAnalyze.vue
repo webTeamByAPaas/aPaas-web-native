@@ -30,7 +30,7 @@
                     @click="handleClickRight(firstPoint, 'start')">
                     <h4>起点</h4>
                     <!-- 起点如果是不在线或异常定位数据，则不显示起点 -->
-                    <article v-if="firstPoint.type !== 4 && firstPoint.type !== 5 && analyzePointsRange.length > 0">
+                    <article v-if="firstPoint.type !== 4 && firstPoint.type !== 5 && analyzePointsRange.length > 0 && analyzePointsRange[0].address">
                         位置:{{analyzePointsRange[0].address}}
                     </article>
                 </section>
@@ -105,7 +105,7 @@
                 <section class="track-analyze-item-right pointer"
                     @click="handleClickRight(lastPoint, 'end')">
                     <h4>终点</h4>
-                    <article v-if="analyzePointsRange.length > 0">
+                    <article v-if="analyzePointsRange.length > 0 && analyzePointsRange[analyzePointsRange.length - 1].address">
                         位置:{{analyzePointsRange[analyzePointsRange.length - 1].address}}
                     </article>
                 </section>

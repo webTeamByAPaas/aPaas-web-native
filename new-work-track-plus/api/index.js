@@ -136,7 +136,7 @@ export function getWorkTrackAnalyze (params) {
                 time: "['1590458722000','1590467258000']",
             }
             新接口
-                status 1. 不在线：用于记录开始点、结束点，有可能开始点和结束点为同一个数据
+                status 1. 不在线：用于记录开始点、结束点，有可能开始点和结束点为同一个数据 或者 没有数据
                 status 2. 移动： 用于画轨迹线
                 status 3 停留时，值记录这段时间中，定位点中的某一个点作为中心
                 status 4. 定位失败时：与不在线处理一样
@@ -218,15 +218,12 @@ export function getWorkTrackAnalyze (params) {
                     // 生成唯一id，用于绘图
                     item.uuid = guid()
                     // 处理定位数据-状态图标 + 地址信息
-                    item.address = [
-                        { address: '' },
-                        { address: '' }
-                    ]
+                    item.address = ''
                     item.position = []
                     try {
                         if (item.status === '1' || item.status === '2' || item.status === '4') {
                             // status : 2 , 多个坐标数据
-                            // status : 1, 3， 两个坐标数据
+                            // status : 1, 3， 两个坐标数据 或者 没有数据
                             if (item.pointDatas.length > 0) {
                                 let len = item.pointDatas.length
                                 item.address = [
